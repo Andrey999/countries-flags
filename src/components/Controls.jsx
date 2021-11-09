@@ -29,7 +29,6 @@ export const Controls = ({ handleSearch }) => {
 
     useEffect(() => {
         const regionValue = region?.value || '';
-        console.log(regionValue);
         handleSearch(searchText, regionValue)
     }, [searchText, region])
 
