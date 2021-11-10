@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Select from 'react-select';
-import { IoSearchOutline } from 'react-icons/io5'
 
 
 export const CustomSelect = styled(Select).attrs({
