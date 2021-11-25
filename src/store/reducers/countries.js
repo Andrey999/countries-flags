@@ -1,10 +1,34 @@
+import { FETCH_COUNTRIES_REQUEST, FETCH_COUNTRIES_SUCCESS, FETCH_COUNTRIES_ERROR } from '../constants'
+
 const initialState = {
-    countries: []
+    loading: false,
+    countries: [],
+    error: ''
 }
 
-const countries = (state = initialState, action) => {
+export const countries = (state = initialState, action) => {
     switch (action.type) {
-        case 'hello': return state
+        case FETCH_COUNTRIES_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case FETCH_COUNTRIES_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                countries: action.payload
+            }
+
+        case FETCH_COUNTRIES_ERROR:
+            return {
+                ...state,
+                loading: false,
+                countries: [],
+                error: action.payload
+            }
+
         default:
             return state
     }

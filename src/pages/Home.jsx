@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
-import { ALL_COUNTRIES } from '../config'
 import { Controls } from '../components/Controls';
 import { List } from '../components/List';
-import axios from 'axios';
 import Card from '../components/Card';
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { loadCountries } from '../store/actions/countries'
 
 
-export const Home = ({ countries, setCountries }) => {
+export const Home = () => {
+    const { countries } = useSelector(state => state.countries);
     const [filteredCountries, setFilteredCountries] = useState(countries)
+
     const history = useHistory()
+    const dispatch = useDispatch();
 
     const handleSearch = (searchText, region) => {
         let data = [...countries]
@@ -25,9 +28,9 @@ export const Home = ({ countries, setCountries }) => {
     }
 
     useEffect(() => {
+
         if (!countries.length) {
-            axios.get(ALL_COUNTRIES)
-                .then(({ data }) => setCountries(data))
+            dispatch(loadCountries())
         }
     }, [])
 
