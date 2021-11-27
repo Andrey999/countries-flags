@@ -28,13 +28,9 @@ export const Home = () => {
     }
 
     useEffect(() => {
-
         if (!countries.length) {
             dispatch(loadCountries())
         }
-    }, [])
-
-    useEffect(() => {
         handleSearch()
     }, [countries])
 
