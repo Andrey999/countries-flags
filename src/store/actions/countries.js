@@ -2,16 +2,16 @@ import { FETCH_COUNTRIES_REQUEST, FETCH_COUNTRIES_SUCCESS, FETCH_COUNTRIES_ERROR
 import { ALL_COUNTRIES } from '../../config'
 import axios from 'axios'
 
-export const fetchCountries = () => ({
+const fetchCountries = () => ({
     type: FETCH_COUNTRIES_REQUEST
 })
 
-export const successCountries = (countries) => ({
+const successCountries = (countries) => ({
     type: FETCH_COUNTRIES_SUCCESS,
     payload: countries
 })
 
-export const errorCountries = (error) => ({
+const errorCountries = (error) => ({
     type: FETCH_COUNTRIES_ERROR,
     payload: error
 })

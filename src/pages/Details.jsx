@@ -5,16 +5,18 @@ import { IoArrowBack } from 'react-icons/io5'
 import { searchByCountry } from '../config';
 import { Button } from '../components/Button'
 import { Info } from '../components/Info'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadCountry } from '../store/actions/details'
 
 
 export const Details = () => {
-    const [country, setCountry] = useState(null)
+    const country = useSelector(state => state.details.country)
+    const dispatch = useDispatch()
     const history = useHistory()
     const params = useParams()
 
     useEffect(() => {
-        axios.get(searchByCountry(params.name))
-            .then(({ data }) => setCountry(data[0]))
+        dispatch(loadCountry(params.name))
     }, [params.name])
 
     return (
