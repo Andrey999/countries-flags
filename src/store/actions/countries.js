@@ -17,13 +17,14 @@ export const errorCountries = (error) => ({
 })
 
 export const loadCountries = () => {
-    return dispatch => {
-        dispatch(fetchCountries());
+    return async (dispatch) => {
+        try {
+            dispatch(fetchCountries());
 
-        axios.get(ALL_COUNTRIES)
-            .then(({ data }) => dispatch(successCountries(data)))
-            .catch(err => {
-                dispatch(errorCountries(err.message));
-            });
+            const { data } = await axios.get(ALL_COUNTRIES)
+            dispatch(successCountries(data))
+        } catch (err) {
+            dispatch(errorCountries(err.message))
+        }
     }
 }

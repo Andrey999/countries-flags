@@ -24,8 +24,6 @@ export const countries = (state = initialState, action) => {
         case FETCH_COUNTRIES_ERROR:
             return {
                 ...state,
-                loading: false,
-                countries: [],
                 error: action.payload
             }
 
