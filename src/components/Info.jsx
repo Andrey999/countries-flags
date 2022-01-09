@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { filterByCode } from '../config';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { loadNeighbors } from '../store/actions/details'
 
 const Wrapper = styled.section`
     margin-top: 3rem;
@@ -96,15 +96,16 @@ const Tags = styled.span`
 `;
 
 export const Info = (props) => {
+    const neighbors = useSelector(state => state.details.neighbors);
+
     const { name, nativeName, flag, capital, population, region, subregion, topLevelDomain,
         currencies = [], languages = [], borders = [], push } = props
 
-    const [neighbors, setNeighbors] = useState([]) 
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (borders.length) {
-            axios.get(filterByCode(borders))
-                .then(({ data }) => setNeighbors(data.map(c => c.name)))
+            dispatch(loadNeighbors(borders))
         }
     }, [borders])
 

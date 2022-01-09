@@ -1,5 +1,5 @@
-import { FETCH_COUNTRY_REQUEST, FETCH_COUNTRY_SUCCESS, FETCH_COUNTRY_ERROR } from '../constants'
-import { searchByCountry } from '../../config';
+import { FETCH_COUNTRY_REQUEST, FETCH_COUNTRY_SUCCESS, FETCH_COUNTRY_ERROR, FETCH_NEIGHBORS } from '../constants'
+import { searchByCountry, filterByCode } from '../../config';
 import axios from 'axios'
 
 const fetchCountry = () => ({
@@ -16,6 +16,11 @@ const errorCountry = (error) => ({
     payload: error
 })
 
+const fetchNeighbors = (neighbors) => ({
+    type: FETCH_NEIGHBORS,
+    payload: neighbors
+})
+
 export const loadCountry = (name) => {
     return async (dispatch) => {
         try {
@@ -25,6 +30,17 @@ export const loadCountry = (name) => {
             dispatch(successCountry(data[0]))
         } catch (err) {
             dispatch(errorCountry(err.message))
+        }
+    }
+}
+
+export const loadNeighbors = (neighbors) => {
+    return async (dispatch) => {
+        try {
+            const { data } = await axios.get(filterByCode(neighbors))
+            dispatch(fetchNeighbors(data.map(c => c.name)))
+        } catch (err) {
+            
         }
     }
 }

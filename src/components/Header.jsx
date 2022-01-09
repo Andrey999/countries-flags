@@ -3,6 +3,8 @@ import { Container } from './Container';
 import { IoMoonOutline, IoMoon } from "react-icons/io5";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { changeTheme } from '../store/actions/countries';
 
 const StyledHeader = styled.header`
     box-shadow: var(--shadow);
@@ -32,20 +34,21 @@ const ThemeSwitcher = styled.div`
 `;
 
 export const Header = () => {
-    const [theme, setTheme] = useState('light')
+    const theme = useSelector(state => state.countries.theme)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         document.body.setAttribute('data-theme', theme)
     }, [theme])
 
-    const changeTheme = () => setTheme(theme === 'light' ? 'dark' : 'light')
+    const change = () => dispatch(changeTheme(theme === 'light' ? 'dark' : 'light'))
 
     return (
         <StyledHeader>
             <Container>
                 <Wrapper>
                     <Title>Where is the world?</Title>
-                    <ThemeSwitcher onClick={changeTheme}>
+                    <ThemeSwitcher onClick={change}>
                         {theme === 'light' ? <IoMoonOutline size="14px" /> : <IoMoon size="14px" />}
                         <span style={{ marginLeft: '0.75rem' }} >{theme} Theme</span>
                     </ThemeSwitcher>

@@ -1,6 +1,8 @@
-import { FETCH_COUNTRIES_REQUEST, FETCH_COUNTRIES_SUCCESS, FETCH_COUNTRIES_ERROR } from '../constants'
+import { FETCH_COUNTRIES_REQUEST, FETCH_COUNTRIES_SUCCESS, FETCH_COUNTRIES_ERROR, CHANGE_THEME } from '../constants'
 
 const initialState = {
+    theme: 'light',
+
     loading: false,
     countries: [],
     error: ''
@@ -25,6 +27,12 @@ export const countries = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload
+            }
+
+        case CHANGE_THEME:
+            return {
+                ...state,
+                theme: action.payload
             }
 
         default:

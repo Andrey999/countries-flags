@@ -1,6 +1,11 @@
-import { FETCH_COUNTRIES_REQUEST, FETCH_COUNTRIES_SUCCESS, FETCH_COUNTRIES_ERROR } from '../constants'
+import { FETCH_COUNTRIES_REQUEST, FETCH_COUNTRIES_SUCCESS, FETCH_COUNTRIES_ERROR, CHANGE_THEME } from '../constants'
 import { ALL_COUNTRIES } from '../../config'
 import axios from 'axios'
+
+export const changeTheme = (theme) => ({
+    type: CHANGE_THEME,
+    payload: theme
+})
 
 const fetchCountries = () => ({
     type: FETCH_COUNTRIES_REQUEST

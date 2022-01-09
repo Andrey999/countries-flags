@@ -5,10 +5,16 @@ import Card from '../components/Card';
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { loadCountries } from '../store/actions/countries'
+import { Loader } from '../components/Loader';
 
 
 export const Home = () => {
-    const { countries } = useSelector(state => state.countries);
+    const { countries, loading, error } = useSelector(state => ({
+        countries: state.countries.countries,
+        loading: state.countries.loading,
+        error: state.countries.error
+    }))
+    
     const [filteredCountries, setFilteredCountries] = useState(countries)
 
     const history = useHistory()
@@ -33,6 +39,8 @@ export const Home = () => {
         }
         handleSearch()
     }, [countries])
+
+    if(loading) return <Loader />
 
     return (
         <>

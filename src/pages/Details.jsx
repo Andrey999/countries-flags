@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { IoArrowBack } from 'react-icons/io5'
-import { searchByCountry } from '../config';
 import { Button } from '../components/Button'
 import { Info } from '../components/Info'
 import { useDispatch, useSelector } from 'react-redux'

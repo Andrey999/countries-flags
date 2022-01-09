@@ -1,8 +1,9 @@
-import { FETCH_COUNTRY_REQUEST, FETCH_COUNTRY_SUCCESS, FETCH_COUNTRY_ERROR } from '../constants'
+import { FETCH_COUNTRY_REQUEST, FETCH_COUNTRY_SUCCESS, FETCH_COUNTRY_ERROR, FETCH_NEIGHBORS } from '../constants'
 
 const initialState = {
     loading: false,
     country: null,
+    neighbors: [],
     error: ''
 }
 
@@ -25,6 +26,12 @@ export const details = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload
+            }
+
+        case FETCH_NEIGHBORS:
+            return {
+                ...state,
+                neighbors: action.payload
             }
 
         default:
